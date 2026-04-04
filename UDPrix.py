@@ -76,7 +76,7 @@ def car_telemetry(buffer, rpmmin, rpmmax, max_perc):
             'm_steer':                          0.0,
             'm_brake':                          0.0,
             'm_clutch':                           0,
-            'm_gear':                           buffer[14],
+            'm_gear':                           -1 if buffer[14] == 255 else buffer[14], # -1 = reverse, 0 = neutral, 1-8 = gears
             'm_engineRPM':                      struct.unpack('<H', buffer[15:17])[0],
             'm_drs':                              0,
             'm_revLightsPercent':               rev_light(buffer[15:17], rpmmin, rpmmax, max_perc),
